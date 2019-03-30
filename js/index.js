@@ -82,6 +82,13 @@ function draw() {
   }
 
 
+//verificar si se toco la direccional derecha
+  if (rightPressed && paddleX < canvas.width - paddleWidth) {
+    paddleX += 7;
+  } else if (leftPressed && paddleX > 0) {
+    paddleX -= 7;
+  }
+
   x += dx;
   y += dy;
 }
