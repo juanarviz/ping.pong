@@ -23,13 +23,21 @@ document.addEventListener("keydown",keyDownHandler, false);
 document.addEventListener("keyup",keyUpHandler, false);
 
 // Esta funcion determina si se presiona una teclas
-function keyDownHandler(){
-
+function keyDownHandler(event){
+  if (event.keyCode == 39) {
+    rightPressed = true;
+  } else if (event.keyCode == 37) {
+    leftPressed = true;
+  }
 }
 
 // Esta funcion determina si se suulta una teclas
-function keyUpHandler(){
-
+function keyUpHandler(event){
+    if (event.keyCode == 39) {
+      rightPressed = false;
+    } else if (event.keyCode == 37) {
+      leftPressed = false;
+    }
 }
 
 // Esta funcion dibuja un paleta
