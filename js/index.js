@@ -70,17 +70,27 @@ function draw() {
   // Se llama la funcion de dibujar la paleta
   drawPaddle();
 
-  // veriflaicar si llego al limite de arriva/ABAJO
-  if (y + dy < 0 || y + dy > canvas.height ) {
-    dy = -dy;
-  }
-
-
   // verificar si llego al limite izquiedo/derecho
-  if (x + dx < 0 || x + dx > canvas.width ) {
+  if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
     dx = -dx;
   }
 
+  // veriflaicar si llego al limite de arriva/ABAJO
+//  if (y + dy > canvas.height - ballRadius || y + dy < ballRadius) {
+  //  dy = -dy;
+//  }
+
+if(y + dy < ballRadius) {
+  dy = -dy;
+} else if (y + dy > canvas.height - ballRadius) {
+  if (x > paddleX && paddleX + paddleWidth) {
+    dy = -dy;
+  } else {
+      alert("MORISTE WEY!!!");
+      document.location.reload();
+  }
+
+}
 
 //verificar si se toco la direccional derecha
   if (rightPressed && paddleX < canvas.width - paddleWidth) {
