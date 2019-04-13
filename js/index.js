@@ -18,6 +18,14 @@ var paddleX = (canvas.width - paddleWidth) / 2;
 var rightPressed = false;
 var leftPressed = false;
 
+var brickRowCount = 3;
+var brickColumnCount = 5;
+var brickWidth = 75;
+var brickHeight = 20;
+var brickPadding = 10;
+var brickOffsetTop = 30;
+var brickOffsetLeft = 30;
+
 //agrgar eventos de presionado y soltado de teclas
 document.addEventListener("keydown",keyDownHandler, false);
 document.addEventListener("keyup",keyUpHandler, false);
@@ -50,10 +58,26 @@ function drawPaddle() {
  context.closePath();
 }
 
+// Esta funsion dibuja una fila de bloque
+function drawBricks() {
+  for (var row = 0; row  <  brickRowCount; row++) {
+    for (var column = 0; column < brickColumnCount; column++) {
+      var brickX = (column *(brickWidth + brickPadding))+ brickOffsetLeft;
+      var brickY = (row *(brickHeight + brickPadding))+ brickOffsetTop;
+
+      //dibujar bloque
+
+      context.beginPath();
+      context.rect(brickX, brickY, brickWidth, brickHeight);
+      context.fillStyle = "#54a0ff";
+      context.fill();
+      context.closePath();
+    }
+  }
+}
 
 // Esta función dibuja un circulo de la posicion x, y
 function drawBall() {
-
   context.beginPath();
   context.arc(x, y, ballRadius,0,Math.PI*2);
   context.fillStyle="#0095DD";
@@ -64,11 +88,16 @@ function drawBall() {
 function draw() {
   context.clearRect(0, 0, canvas.width, canvas.height);
 
+//se llama ala funcion nde dibujar los bloques
+  drawBricks();
+
 // se llama  a la funcion de dibujar un circulo
   drawBall();
 
   // Se llama la funcion de dibujar la paleta
   drawPaddle();
+
+
 
   // verificar si llego al limite izquiedo/derecho
   if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
@@ -86,7 +115,7 @@ if(y + dy < ballRadius) {
   if (x > paddleX && paddleX + paddleWidth) {
     dy = -dy;
   } else {
-      alert("MORISTE WEY!!!");
+      alert("ESTAS MUERTO");
       document.location.reload();
   }
 
